@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/url_shortener")
 public class ShortenUrlController {
     private final UrlMappingService urlMappingService;
 
@@ -21,7 +21,7 @@ public class ShortenUrlController {
         return ResponseEntity.ok(new ShortenUrlResponse(urlMapping.getShortUrl(), urlMapping.getOriginalUrl()));
     }
 
-    @PostMapping("/url_shortener")
+    @PostMapping
     public ResponseEntity<ShortenUrlResponse> create(@RequestBody ShortenUrlRequest request) {
         UrlMapping urlMapping = urlMappingService.create(request.getOriginalUrl());
         return ResponseEntity.status(201)
